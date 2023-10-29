@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './ACL_Comp.css';
 
 class ACL_Comp extends Component {
   state = {
@@ -74,7 +75,8 @@ class ACL_Comp extends Component {
   render() {
     return (
       <div>
-  <div>
+        <div className='add-rule-section'>
+  <div style={{display:'block'}}>
     <h1>ACL Management</h1>
     <h2>Add Rule:</h2>
     <div>
@@ -143,7 +145,7 @@ class ACL_Comp extends Component {
         type="text"
         placeholder='Destination Transport Port'
         name="dstTpPort"
-        value={this.state.newRule.dstTpPort}
+        value={Math.max(0,this.state.newRule.dstTpPort)}
         onChange={this.handleInput}
       />
     </div>
@@ -153,7 +155,7 @@ class ACL_Comp extends Component {
         type="number"
         placeholder='Source Transport Port'
         name="srcTpPort"
-        value={this.state.newRule.srcTpPort}
+        value={Math.max(0,this.state.newRule.srcTpPort)}
         onChange={this.handleInput}
       />
     </div>
@@ -186,12 +188,15 @@ class ACL_Comp extends Component {
     </div>
   </div>
           <button onClick={this.addAclRule}>Add Rule</button>
-
-
+          </div>
+    <div className='existing-rules-section'>
         <h2>Existing Rules</h2>
+        <br/>
         <ul>
           {this.state.aclRules.map((rule) => (
-            <li key={rule.id}>
+            <li key={rule.id} style={{
+              backgroundColor:'rgb(189, 189, 189,0.8 )',
+            }}>
               <p>Source IP: {rule.srcIp}</p>
               <p>Destination IP: {rule.dstIp}</p>
               <p>Source MAC: {rule.srcMac}</p>
@@ -204,6 +209,7 @@ class ACL_Comp extends Component {
            </li>
           ))}
         </ul>
+        </div>
       </div>
     );
   }
