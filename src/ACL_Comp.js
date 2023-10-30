@@ -219,20 +219,32 @@ class ACL_Comp extends Component {
     <ul>
   {this.state.aclRules ? (
     this.state.aclRules.map((rule) => (
-      <li key={rule.id} style={{ backgroundColor: 'rgb(189, 189, 189, 0.8)' }}>
+      <li key={rule.id} style={{ backgroundColor: 'rgb(189, 189, 189, 0.8)' }} className="acl-rule-item">
         <p>Source IP: {rule.srcIp}</p>
         <p>Destination IP: {rule.dstIp}</p>
-        <p>Source MAC: {rule.srcMac}</p>
-        <p>Destination MAC: {rule.dstMac}</p>
-        <p>DSCP: {rule.dscp}</p>
-        <p>IP Protocol: {rule.ipProto}</p>
-        <p>Destination TP Port: {rule.dstTpPort}</p>
-        <p>Source TP Port: {rule.srcTpPort}</p>
+        <p className="hidden-info">Source MAC: {rule.srcMac}</p>
+        <p className="hidden-info">Destination MAC: {rule.dstMac}</p>
+        <p className="hidden-info">DSCP: {rule.dscp}</p>
+        <p className="hidden-info">IP Protocol: {rule.ipProto}</p>
+        <p className="hidden-info">Destination TP Port: {rule.dstTpPort}</p>
+        <p className="hidden-info">Source TP Port: {rule.srcTpPort}</p>
         <p>Action: {rule.action}</p>
       </li>
     ))
   ) : (
-    <p>AclRules have not been Fetched.</p>
+    <div>
+        <li style={{ backgroundColor: 'rgb(239, 199, 199)' }} className="acl-rule-item">
+        <p>Source IP: 10.0.0.0</p>
+        <p>Destination IP: 10.0.0.1</p>
+        <p className="hidden-info">Source MAC: aa:bb:cc:Dd:ee:dd</p>
+        <p className="hidden-info">Destination MAC: aa:vv:ee:ss:ff:cc</p>
+        <p className="hidden-info">DSCP: 3</p>
+        <p className="hidden-info">IP Protocol: UDP</p>
+        <p className="hidden-info">Destination TP Port: 34</p>
+        <p className="hidden-info">Source TP Port: 75</p>
+        <p>Action: ALLOW</p>
+      </li>
+    </div>
   )}
     </ul>
 
