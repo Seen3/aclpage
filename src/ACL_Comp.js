@@ -219,7 +219,7 @@ class ACL_Comp extends Component {
     <ul>
   {this.state.aclRules ? (
     this.state.aclRules.map((rule) => (
-      <li key={rule.id} style={{ backgroundColor: 'rgb(189, 189, 189, 0.8)' }} className="acl-rule-item">
+      <li key={rule.id} style={{ backgroundColor: 'rgb(239, 199, 199)' }} className="acl-rule-item">
         <p>Source IP: {rule.srcIp}</p>
         <p>Destination IP: {rule.dstIp}</p>
         <p className="hidden-info">Source MAC: {rule.srcMac}</p>
