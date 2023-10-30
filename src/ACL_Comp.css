@@ -21,6 +21,7 @@ div {
 
   .existing-rules-section {
     flex:2;
+    display: inline;
   }
   h1 {
     font-size: 24px;

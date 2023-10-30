@@ -4,6 +4,8 @@ import './ACL_Comp.css';
 
 class ACL_Comp extends Component {
   state = {
+    IPPost:'',
+    IPFetch:"",
     aclRules: [],
     newRule: {
       srcIp: '',
@@ -31,7 +33,7 @@ class ACL_Comp extends Component {
     }));
   };
   fetchAclRules = () => {
-    axios.get('/api/rules') //TBR
+    axios.get(this.state.IPFetch) //TBR
       .then((response) => {
         this.setState({ aclRules: response.data.aclRules });
       })
@@ -40,7 +42,7 @@ class ACL_Comp extends Component {
       });
   };
   addAclRule=()=>{
-    axios.post('/api/rules',this.state.newRule).then(()=>{
+    axios.post(this.state.IPPost,this.state.newRule).then(()=>{
       this.setState({
         newRule:{
           srcIp: '',
@@ -79,6 +81,16 @@ class ACL_Comp extends Component {
   <div style={{display:'block'}}>
     <h1>ACL Management</h1>
     <h2>Add Rule:</h2>
+    <div>
+      <label>Controller URL:</label>
+      <input
+        type="text"
+        placeholder='https://172.0.0.2/../rules'
+        name="IPPost"
+        value={this.state.IPPost}
+        onChange={this.handleInput}
+      />
+    </div>
     <div>
       <label>Source IP:</label>
       <input
@@ -192,23 +204,38 @@ class ACL_Comp extends Component {
     <div className='existing-rules-section'>
         <h2>Existing Rules</h2>
         <br/>
-        <ul>
-          {this.state.aclRules.map((rule) => (
-            <li key={rule.id} style={{
-              backgroundColor:'rgb(189, 189, 189,0.8 )',
-            }}>
-              <p>Source IP: {rule.srcIp}</p>
-              <p>Destination IP: {rule.dstIp}</p>
-              <p>Source MAC: {rule.srcMac}</p>
-              <p>Destination MAC: {rule.dstMac}</p>
-              <p>DSCP: {rule.dscp}</p>
-              <p>IP Protocol: {rule.ipProto}</p>
-              <p>Destination TP Port: {rule.dstTpPort}</p>
-              <p>Source TP Port: {rule.srcTpPort}</p>
-              <p>Action: {rule.action}</p>
-           </li>
-          ))}
-        </ul>
+        <div>
+      <label>Controller URL To Fetch tables:</label>
+      <input
+        type="text"
+        placeholder='https://172.0.0.2/../rules'
+        name="IPFetch"
+        value={this.state.IPFetch}
+        onChange={this.handleInput}
+      />
+    <button onClick={this.fetchAclRules}>Fetch</button>
+    </div>
+    <br/>
+    <ul>
+  {this.state.aclRules ? (
+    this.state.aclRules.map((rule) => (
+      <li key={rule.id} style={{ backgroundColor: 'rgb(189, 189, 189, 0.8)' }}>
+        <p>Source IP: {rule.srcIp}</p>
+        <p>Destination IP: {rule.dstIp}</p>
+        <p>Source MAC: {rule.srcMac}</p>
+        <p>Destination MAC: {rule.dstMac}</p>
+        <p>DSCP: {rule.dscp}</p>
+        <p>IP Protocol: {rule.ipProto}</p>
+        <p>Destination TP Port: {rule.dstTpPort}</p>
+        <p>Source TP Port: {rule.srcTpPort}</p>
+        <p>Action: {rule.action}</p>
+      </li>
+    ))
+  ) : (
+    <p>AclRules have not been Fetched.</p>
+  )}
+    </ul>
+
         </div>
       </div>
     );
