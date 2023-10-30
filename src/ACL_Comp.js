@@ -232,19 +232,7 @@ class ACL_Comp extends Component {
       </li>
     ))
   ) : (
-    <div>
-        <li style={{ backgroundColor: 'rgb(239, 199, 199)' }} className="acl-rule-item">
-        <p>Source IP: 10.0.0.0</p>
-        <p>Destination IP: 10.0.0.1</p>
-        <p className="hidden-info">Source MAC: aa:bb:cc:Dd:ee:dd</p>
-        <p className="hidden-info">Destination MAC: aa:vv:ee:ss:ff:cc</p>
-        <p className="hidden-info">DSCP: 3</p>
-        <p className="hidden-info">IP Protocol: UDP</p>
-        <p className="hidden-info">Destination TP Port: 34</p>
-        <p className="hidden-info">Source TP Port: 75</p>
-        <p>Action: ALLOW</p>
-      </li>
-    </div>
+    <p>ACL Tables not fetched.</p>
   )}
     </ul>
 
