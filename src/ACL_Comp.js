@@ -61,6 +61,13 @@ class ACL_Comp extends Component {
       console.error("Error adding ACL rules:", err);
     })
   }
+  handleInput2=(e)=>{
+    const name=e.target.name;
+    const value=e.target.value;
+    this.setState((prevState)=>({
+      [name]:value,
+    }))
+  }
   handleInput=(e)=>{
     const name=e.target.name;
     const value=e.target.value;
@@ -88,7 +95,7 @@ class ACL_Comp extends Component {
         placeholder='https://172.0.0.2/../rules'
         name="IPPost"
         value={this.state.IPPost}
-        onChange={this.handleInput}
+        onChange={this.handleInput2}
       />
     </div>
     <div>
@@ -211,7 +218,7 @@ class ACL_Comp extends Component {
         placeholder='https://172.0.0.2/../rules'
         name="IPFetch"
         value={this.state.IPFetch}
-        onChange={this.handleInput}
+        onChange={this.handleInput2}
       />
     <button onClick={this.fetchAclRules}>Fetch</button>
     </div>
