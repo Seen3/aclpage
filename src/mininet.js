@@ -18,6 +18,18 @@ function MiniG() {
       setOutput('Error occurred. Please check the console.');
     }
   };
+  const clearMininetCommand=async()=>{
+    try {
+        const response = await axios.post('http://localhost:3002/clearMininetCommand', {
+          command: `sudo mn -c`,
+        });
+
+        setOutput(response.data.output);
+      } catch (error) {
+        console.error('Error:', error.message);
+        setOutput('Error occurred. Please check the console.');
+      }
+  };
 
   return (
     <div>
@@ -33,6 +45,7 @@ function MiniG() {
         <h3>Output:</h3>
         <pre>{output}</pre>
       </div>
+      <button onClick={clearMininetCommand}>Clear Mininet</button>
     </div>
   );
 }
